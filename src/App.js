@@ -7,7 +7,10 @@ import Task from "./component/Task";
 import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
 import ProfileDetails from "./component/ProfileDetails";
 import ResetPassword from "./component/ResetPassword";
-import { useState } from "react";
+import  React, { useState } from "react";
+
+
+export const UsersContext= React.createContext()
 function App() {
   let [users,setUsers] = useState([
     {
@@ -36,6 +39,7 @@ function App() {
     }
   ])
   return <>
+  <UsersContext.Provider value={{users,setUsers}}>
   <BrowserRouter>
     <div id="wrapper">
         <Sidebar/>
@@ -53,6 +57,7 @@ function App() {
         </Routes>
     </div>
   </BrowserRouter>
+  </UsersContext.Provider>
   </>
 }
 

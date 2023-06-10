@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Card from './Card'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import {UsersContext} from '../App';
 function Dashboard({users,setUsers}) {
+    let userContext=useContext(UsersContext)
+    console.log('Context',userContext)
     let [data,setData] = useState([{
         title:"Earnings (Monthly)",
         value:"$5000",
