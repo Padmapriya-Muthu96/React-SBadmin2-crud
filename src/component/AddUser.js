@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate, useParams } from 'react-router-dom';
+import { UsersContext } from '../context/userContextComponent';
+
 
 function AddUser({users,setUsers}) {
+  let userContext=useContext(UsersContext)
+ 
 
   let navigate = useNavigate()
   let params=useParams()
@@ -15,7 +19,7 @@ function AddUser({users,setUsers}) {
 
   let handleSubmit = ()=>{
     let newUser = { name,email,mobile,dob }
-    let newArray = [...users]
+    let newArray = [...userContext.users]
 
     if(params.id !==undefined){
       newArray.splice(params.id,1,newUser)
@@ -24,19 +28,19 @@ function AddUser({users,setUsers}) {
       newArray.push(newUser)
     }
     
-    setUsers(newArray)
+    userContext.setUsers(newArray)
     navigate('/dashboard')
   }
 
   useEffect(()=>{
     if(params.id !== undefined){
 
-      setName(users[params.id].name)
-    setEmail(users[params.id].email)
-    setMobile(users[params.id].mobile)
-    setDob(users[params.id].dob)
+      setName(userContext.users[params.id].name)
+    setEmail(userContext.users[params.id].email)
+    setMobile(userContext.users[params.id].mobile)
+    setDob(userContext.users[params.id].dob)
 
-    }}, [params.id,users]
+    }}, [params.id,userContext.users]
     
 
   )
